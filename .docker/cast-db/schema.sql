@@ -1,0 +1,3 @@
+CREATE SCHEMA cast;
+CREATE USER 'cast'@'%' IDENTIFIED BY '3vxoYADFrhW3iNAG8VxT';
+GRANT ALL PRIVILEGES ON `cast`.* TO 'cast'@'%';
