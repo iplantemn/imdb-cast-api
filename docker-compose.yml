@@ -1,0 +1,21 @@
+version: '2.2'
+services:
+  cast-api:
+    build: ""
+    environment:
+      - server_contextPath=/cast
+    depends_on:
+      - cast-db
+    ports:
+      - "5013:8080"
+    expose:
+      - "5013"
+  cast-db:
+    build: ./.docker/cast-db
+    command: ['mysqld']
+    environment:
+      - MYSQL_ROOT_PASSWORD=jw2nPLwNq4CtDizqJfZv
+    ports:
+      - "3307:3306"
+    expose:
+      - "3307"
