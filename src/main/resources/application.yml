@@ -1,0 +1,19 @@
+spring:
+  data:
+    rest:
+      base-path: api/v1
+  datasource:
+    url: jdbc:mysql://cast-db:3306/cast
+    username: cast
+    password: 3vxoYADFrhW3iNAG8VxT
+  jpa:
+    open-in-view: false
+  liquibase:
+    change-log: classpath:/db/changelog/changelog-master.xml
+
+---
+
+spring:
+  profiles: local
+  datasource:
+    url: jdbc:mysql://localhost:3307/cast
