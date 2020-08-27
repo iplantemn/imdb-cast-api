@@ -2,8 +2,6 @@ package com.iplante.imdb.cast.controller;
 
 import com.iplante.imdb.cast.entity.Cast;
 import com.iplante.imdb.cast.service.CastService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
  */
 @RepositoryRestController
 public class CastController {
-
-    private static final Logger LOGGER = LoggerFactory.getLogger(CastController.class);
 
     private final CastService castService;
 
