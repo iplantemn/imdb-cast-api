@@ -3,8 +3,8 @@ package com.iplante.imdb.cast.service;
 import com.iplante.imdb.cast.entity.Cast;
 import com.iplante.imdb.cast.repository.CastRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
@@ -19,18 +19,20 @@ import java.util.List;
 @Service
 public class CastService {
 
-    private static final String MOVIES_API_URL = "http://localhost:5012";
-
     private final CastRepository castRepository;
+
+    private final MovieClient movieClient;
 
     /**
      * Service constructor.
      *
      * @param castRepository the {@link Cast} repository.
+     * @param movieClient the REST client to interact with the Movies API.
      */
     @Autowired
-    public CastService(CastRepository castRepository) {
+    public CastService(CastRepository castRepository, MovieClient movieClient) {
         this.castRepository = castRepository;
+        this.movieClient = movieClient;
     }
 
     /**
@@ -53,37 +55,20 @@ public class CastService {
 
     /**
      * Get all movies in which a given {@link Cast} is credited.
-     * todo: automatically unmarshall JSON response.
      *
      * @param castId the ID of the {@link Cast}
-     * @return a list of movies in which the given {@link Cast} is credited.
+     * @param pageable the optional Pageable query parameters.
+     * @return Object containing a list of movies in which the given {@link Cast} is credited. We return Object to just
+     *      act as a proxy and return exactly what we got.
      * @throws EntityNotFoundException if no {@link Cast} found for given ID.
      */
-    public String getCastMovies(long castId) {
+    public Object getCastMovies(long castId, Pageable pageable) {
         final var cast = castRepository.findById(castId);
 
         if (cast.isPresent()) {
-            final var uri = String.format("/api/v1/movies?castId=%d&size=%d", castId, Integer.MAX_VALUE);
-            return getMoviesApiWebClient()
-                    .get()
-                    .uri(uri)
-                    .retrieve()
-                    .bodyToMono(String.class)
-                    .block();
+            return movieClient.getCastMovies(castId, pageable);
         } else {
             throw new EntityNotFoundException("Cast member not found: castId=" + castId);
         }
-    }
-
-    /**
-     * Get the {@link WebClient} to make REST calls against the Movies API.
-     *
-     * @return the {@link WebClient}.
-     */
-    private WebClient getMoviesApiWebClient() {
-        return WebClient
-                .builder()
-                .baseUrl(MOVIES_API_URL)
-                .build();
     }
 }
