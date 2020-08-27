@@ -1,7 +1,7 @@
 package com.iplante.imdb.cast.seeder;
 
 import com.iplante.imdb.cast.entity.Cast;
-import com.iplante.imdb.cast.repository.CastRepository;
+import com.iplante.imdb.cast.service.CastService;
 import com.iplante.imdb.cast.util.RandomUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -24,16 +24,16 @@ public class DatabaseSeeder {
 
     private static final Logger LOGGER = Logger.getLogger(String.valueOf(DatabaseSeeder.class));
 
-    private final CastRepository castRepository;
+    private final CastService castService;
 
     @Autowired
-    public DatabaseSeeder(CastRepository castRepository) {
-        this.castRepository = castRepository;
+    public DatabaseSeeder(CastService castService) {
+        this.castService = castService;
     }
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-        if (castRepository.count() == 0) {
+        if (castService.getCastCount() == 0) {
             LOGGER.info("Seeding database");
             populateCastTable(2000);
             LOGGER.info("Done seeding database");
@@ -43,9 +43,9 @@ public class DatabaseSeeder {
     }
 
     /**
-     * Populate the `cast` table with a given amount of rows.
+     * Populate the {@link Cast} table with a given amount of rows.
      *
-     * @param seed the number of `cast` entries to generate.
+     * @param seed the number of {@link Cast} entries to generate.
      */
     private void populateCastTable(int seed) {
         final var cast = IntStream
@@ -53,14 +53,14 @@ public class DatabaseSeeder {
                 .mapToObj(this::generateCastMember)
                 .collect(Collectors.toList());
 
-        castRepository.saveAll(cast);
+        castService.addCast(cast);
     }
 
     /**
-     * Generate a `Cast` object with random data.
+     * Generate a {@link Cast} object with random data.
      *
      * @param num ignored parameter.
-     * @return a `Cast` member.
+     * @return a {@link Cast} member.
      */
     private Cast generateCastMember(int num) {
         return Cast
