@@ -1,7 +1,6 @@
 package com.iplante.imdb.cast.configuration;
 
 import org.junit.jupiter.api.Test;
-import org.mockito.InjectMocks;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
