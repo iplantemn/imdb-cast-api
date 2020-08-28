@@ -18,7 +18,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 public class MovieClient {
 
-    private static final String MOVIES_API_PATH = "/api/v1/movies/search/cast";
+    private static final String MOVIES_API_PATH = "/api/v1/movies/search/castId";
 
     private final RestTemplate restTemplate;
 
