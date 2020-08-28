@@ -53,7 +53,7 @@ public class CastServiceTest {
     }
 
     @Test
-    void getCastCountsReturnsMovieCount() {
+    void getCastCountsReturnsTableCount() {
         when(castRepository.count()).thenReturn(100L);
         assertThat(castService.getCastCount()).isEqualTo(100L);
         verify(castRepository).count();
