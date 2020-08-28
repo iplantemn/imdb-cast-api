@@ -1,3 +1,8 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, mappings
 spring:
   data:
     rest:
