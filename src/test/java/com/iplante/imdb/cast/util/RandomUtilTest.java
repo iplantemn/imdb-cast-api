@@ -23,8 +23,8 @@ public class RandomUtilTest {
             final var result = RandomUtil.generateRandomDate(1990, 2010);
             final var year = getYear(result);
 
-            assertThat(year >= 1990).isTrue();
-            assertThat(year <= 2010).isTrue();
+            assertThat(year).isGreaterThanOrEqualTo(1990);
+            assertThat(year).isLessThanOrEqualTo(2010);
         }
     }
 
@@ -32,8 +32,8 @@ public class RandomUtilTest {
     void generateRandomInt() {
         for (int i = 0; i < 100; i++) {
             final var result = RandomUtil.generateRandomInt(1, 10);
-            assertThat(result >= 1).isTrue();
-            assertThat(result <= 10).isTrue();
+            assertThat(result).isGreaterThanOrEqualTo(1);
+            assertThat(result).isLessThanOrEqualTo(10);
         }
     }
 
@@ -41,8 +41,8 @@ public class RandomUtilTest {
     void generateRandomString() {
         for (int i = 0; i < 100; i++) {
             final var result = RandomUtil.generateRandomString(10, 20);
-            assertThat(result.length() >= 10).isTrue();
-            assertThat(result.length() <= 20).isTrue();
+            assertThat(result).hasSizeGreaterThanOrEqualTo(10);
+            assertThat(result).hasSizeLessThanOrEqualTo(20);
         }
     }
 
