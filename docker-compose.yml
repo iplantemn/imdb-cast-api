@@ -10,12 +10,19 @@ services:
       - "5013:8080"
     expose:
       - "5013"
+    networks:
+      - imdb
   cast-db:
     build: ./.docker/cast-db
-    command: ['mysqld']
+    command: [ 'mysqld' ]
     environment:
       - MYSQL_ROOT_PASSWORD=jw2nPLwNq4CtDizqJfZv
     ports:
       - "3307:3306"
     expose:
       - "3307"
+    networks:
+      - imdb
+networks:
+  imdb:
+    external: true
