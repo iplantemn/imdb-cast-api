@@ -10,7 +10,7 @@
 		{
 			"name": "GET /cast",
 			"request": {
-				"url": "http://localhost:8080/api/v1/movies?size=20&page=0&sort=title=desc",
+				"url": "http://localhost:5013/api/v1/cast?size=20&page=0&sort=lastName=desc",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -92,9 +92,29 @@
 			"response": []
 		},
 		{
-			"name": "PUT /cast by ID",
+			"name": "POST /cast",
 			"request": {
-				"url": "http://localhost:5013/api/v1/cast/2002",
+				"url": "http://localhost:5013/api/v1/cast",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"firstName\": \"Jane\",\n\t\"lastName\": \"Doe\",\n\t\"dateOfBirth\": \"1991-09-21\",\n\t\"bio\": \"No one knew who she was\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PATCH /cast by ID",
+			"request": {
+				"url": "http://localhost:5013/api/v1/cast/{{castId}}",
 				"method": "PATCH",
 				"header": [
 					{
@@ -107,7 +127,7 @@
 					"mode": "raw",
 					"raw": "{\n\t\"lastName\": \"Smith\",\n\t\"bio\": \"She was identified as Jane Smith, but still no one really knew who she was\"\n}"
 				},
-				"description": ""
+				"description": "Replace {{castId}} with an actual ID"
 			},
 			"response": []
 		}
