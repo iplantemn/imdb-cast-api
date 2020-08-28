@@ -1,5 +1,6 @@
 package com.iplante.imdb.cast.service;
 
+import com.iplante.imdb.cast.configuration.MovieApiConfiguration;
 import com.iplante.imdb.cast.entity.Cast;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
@@ -17,18 +18,22 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Component
 public class MovieClient {
 
-    private static final String MOVIES_API_URL = "http://localhost:5012/api/v1/movies/search/cast";
+    private static final String MOVIES_API_PATH = "/api/v1/movies/search/cast";
 
     private final RestTemplate restTemplate;
+
+    private final String moviesApiUrl;
 
     /**
      * Client constructor.
      *
+     * @param movieApiConfiguration the Movie API configuration.
      * @param restTemplate custom {@link RestTemplate}.
      */
     @Autowired
-    public MovieClient(RestTemplate restTemplate) {
+    public MovieClient(MovieApiConfiguration movieApiConfiguration, RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
+        moviesApiUrl = movieApiConfiguration.getBaseUrl() + MOVIES_API_PATH;
     }
 
     /**
@@ -40,7 +45,7 @@ public class MovieClient {
      */
     public Object getCastMovies(long castId, Pageable pageable) {
         final var uri = UriComponentsBuilder
-                .fromUriString(MOVIES_API_URL)
+                .fromUriString(moviesApiUrl)
                 .queryParam("castId", castId)
                 .queryParam("size", pageable.getPageSize())
                 .queryParam("page", pageable.getPageNumber())
