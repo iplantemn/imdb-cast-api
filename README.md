@@ -75,6 +75,12 @@ The application is accessible at the following base URLs:
 
 ### API Docs
 
+#### Postman
+
+For easy interaction with the API, you can import the Postman collection in `./postman`.
+
+#### HATEOAS
+
 Spring Data REST publishes its data using HATEOAS, which uses the API responses and hypermedia to deliver a self-
 documenting API. You can start with:
 
@@ -82,6 +88,8 @@ documenting API. You can start with:
 curl -X GET http://localhost:8080/api/v1/cast # Local
 curl -X GET http://localhost:5013/api/v1/cast # Docker
 ```
+
+#### Spring Boot Actuator
 
 You can also use the Spring Boot Actuator mappings endpoint to get a list of endpoints:
 
