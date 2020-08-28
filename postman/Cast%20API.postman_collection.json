@@ -1,0 +1,115 @@
+{
+	"variables": [],
+	"info": {
+		"name": "Cast API",
+		"_postman_id": "7e54fbfa-f3d7-eb3b-bca7-aa0a259820f3",
+		"description": "Cast API for the IMDB SmartThings project, by Isabelle Plante",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GET /cast",
+			"request": {
+				"url": "http://localhost:5013/api/v1/cast?size=20&page=0&sort=lastName=desc",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET /cast by ID",
+			"request": {
+				"url": "http://localhost:5013/api/v1/cast/{{castId}}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Replace {{castId}} with an actual ID"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /cast/ID/movies",
+			"request": {
+				"url": "http://localhost:5013/api/v1/cast/50/movies?size=20&page=0&sort=lastName=desc",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Replace {{castId}} with an actual ID"
+			},
+			"response": []
+		},
+		{
+			"name": "GET /cast/search/firstName",
+			"request": {
+				"url": "http://localhost:5013/api/v1/cast/search/lastName?lastName={{lastName}}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Replace {{firstName}} with an actual first name."
+			},
+			"response": []
+		},
+		{
+			"name": "GET /cast/search/lastName",
+			"request": {
+				"url": "http://localhost:5013/api/v1/cast/search/firstName?firstName={{firstName}}",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Replace {{lastName}} with an actual last name."
+			},
+			"response": []
+		},
+		{
+			"name": "GET /cast/search/ids",
+			"request": {
+				"url": "http://localhost:5013/api/v1/cast/search/ids?castIds={{castIds}}&size=20&page=0&sort=lastName=desc",
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": []
+				},
+				"description": "Replace {{ids}} with a comma-separated list of IDs (e.g. `1,2,3,11`)"
+			},
+			"response": []
+		},
+		{
+			"name": "PUT /cast by ID",
+			"request": {
+				"url": "http://localhost:5013/api/v1/cast/2002",
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"lastName\": \"Smith\",\n\t\"bio\": \"She was identified as Jane Smith, but still no one really knew who she was\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
