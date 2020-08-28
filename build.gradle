@@ -41,7 +41,7 @@ dependencies {
     testImplementation 'org.mockito:mockito-junit-jupiter:2.21.0'
 }
 
-pmdMain {
+pmd {
     ruleSetFiles = files("pmd-ruleset.xml")
     ruleSets = []
 }
