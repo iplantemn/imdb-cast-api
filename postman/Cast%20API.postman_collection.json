@@ -10,7 +10,7 @@
 		{
 			"name": "GET /cast",
 			"request": {
-				"url": "http://localhost:5013/api/v1/cast?size=20&page=0&sort=lastName=desc",
+				"url": "http://localhost:8080/api/v1/movies?size=20&page=0&sort=title=desc",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -38,7 +38,7 @@
 		{
 			"name": "GET /cast/ID/movies",
 			"request": {
-				"url": "http://localhost:5013/api/v1/cast/50/movies?size=20&page=0&sort=lastName=desc",
+				"url": "http://localhost:5013/api/v1/cast/50/movies?size=20&page=0",
 				"method": "GET",
 				"header": [],
 				"body": {
